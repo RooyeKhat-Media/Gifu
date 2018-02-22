@@ -93,11 +93,12 @@ class FrameStore {
 
   // MARK: - Frames
   /// Loads the frames from an image source, resizes them, then caches them in `animatedFrames`.
-  func prepareFrames() {
+  func prepareFrames(_ completionHandler: (() -> Void)? = nil) {
     frameCount = Int(CGImageSourceGetCount(imageSource))
     animatedFrames.reserveCapacity(frameCount)
     preloadFrameQueue.async {
       self.setupAnimatedFrames()
+      completionHandler?()
     }
   }
 
