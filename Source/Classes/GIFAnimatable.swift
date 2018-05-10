@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 /// The protocol that view classes need to conform to to enable animated GIF support.
 public protocol GIFAnimatable: class {
@@ -188,7 +189,8 @@ extension GIFAnimatable {
   /// Updates the image with a new frame if necessary.
   public func updateImageIfNeeded() {
     if var imageContainer = self as? ImageContainer {
-      imageContainer.image = activeFrame ?? imageContainer.image
+      let container = imageContainer
+      imageContainer.image = activeFrame ?? container.image
     } else {
       layer.contents = activeFrame?.cgImage
     }
